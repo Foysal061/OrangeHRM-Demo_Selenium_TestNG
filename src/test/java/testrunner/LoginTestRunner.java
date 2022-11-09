@@ -1,3 +1,5 @@
+package testrunner;
+
 import Pages.DashboardPage;
 import Pages.LoginPage;
 import org.openqa.selenium.By;
@@ -5,6 +7,8 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import setup.Setup;
+import utils.Utils;
 
 import java.util.List;
 
