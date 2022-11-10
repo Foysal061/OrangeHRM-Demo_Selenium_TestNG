@@ -14,7 +14,7 @@ public class EmployeePage {
     WebElement txtFirstName;
     @FindBy(name = "lastName")
     WebElement txtLastName;
-    @FindBy(css = "submit")
+    @FindBy(css ="[type=submit]")
     public WebElement btnSubmit;
     @FindBy(className = "oxd-switch-input")
     WebElement toggleButton;
