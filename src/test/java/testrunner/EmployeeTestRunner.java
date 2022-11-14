@@ -42,11 +42,11 @@ public class EmployeeTestRunner extends Setup {
         String password = "P@ssword123";
         String confirmPassword = password;
         employeePage.createEmployee(firstName, lastName, userName, password, confirmPassword);
-
         List<WebElement> headerTitle = driver.findElements(By.className("orangehrm-main-title"));
+
+        Utils.waitForElement(driver, headerTitle.get(0), 50);
         Assert.assertTrue(headerTitle.get(0).isDisplayed());
 
-        Utils.waitForElement(driver, headerTitle.get(0),50);
         if (headerTitle.get(0).isDisplayed()) {
             utils.saveJsonList(userName, password);
         }

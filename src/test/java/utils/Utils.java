@@ -16,6 +16,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.Duration;
+import java.util.List;
 
 public class Utils {
     public static void scrollDown(WebDriver driver){
@@ -70,8 +71,20 @@ public class Utils {
         file.close();
         System.out.println("Saved data");
     }
+    public static List readJSONArray(String filename) throws IOException, ParseException {
+        JSONParser parser = new JSONParser();
+        Object object= parser.parse(new FileReader(filename));
+        JSONArray jsonArray = (JSONArray) object;
+        return jsonArray;
+    }
     public static void waitForElement(WebDriver driver, WebElement element, int TIME_UNIT_SECONDS){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TIME_UNIT_SECONDS));
         wait.until(ExpectedConditions.visibilityOf(element));
     }
+
+//    public static void main(String[] args) throws IOException, ParseException {
+//        List data = Utils.readJSONArray("./src/test/resources/Users.json");
+//        JSONObject obj= (JSONObject) data.get(0);
+//        System.out.println(obj.get("username"));
+//    }
 }
