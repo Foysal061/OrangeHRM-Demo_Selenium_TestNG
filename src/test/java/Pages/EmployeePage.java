@@ -21,7 +21,13 @@ public class EmployeePage {
     @FindBy(className = "oxd-input")
     List<WebElement> txtUserCreds;
 
+    @FindBy(className = "oxd-select-text-input")
+    public List<WebElement> drpdnNltyBldGrp;
 
+    @FindBy(className = "oxd-main-menu-item")
+    public List<WebElement> menuItem;
+    @FindBy(className = "oxd-select-text")
+    public List<WebElement> nationality;
     public EmployeePage(WebDriver driver) {
         PageFactory.initElements(driver, this);
     }

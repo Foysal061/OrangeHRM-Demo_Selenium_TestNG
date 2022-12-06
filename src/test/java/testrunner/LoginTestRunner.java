@@ -20,7 +20,7 @@ public class LoginTestRunner extends Setup {
     public void doLogin() {
         loginPage = new LoginPage(driver);
         driver.get("https://opensource-demo.orangehrmlive.com");
-        loginPage.doLogin("admin", "admin123");
+        loginPage.doLogin("Admin", "admin123");
         String urlActual = driver.getCurrentUrl();
         String ursExpected = "dashboard/index";
         System.out.println(urlActual);

@@ -26,7 +26,7 @@ public class EmployeeTestRunner extends Setup {
     public void doLogin() {
         LoginPage loginPage = new LoginPage(driver);
         driver.get("https://opensource-demo.orangehrmlive.com");
-        loginPage.doLogin("admin", "admin123");
+        loginPage.doLogin("Admin", "admin123");
     }
 
     @Test
