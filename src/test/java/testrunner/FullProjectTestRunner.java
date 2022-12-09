@@ -1,5 +1,6 @@
 package testrunner;
 
+import Pages.DashboardPage;
 import Pages.EmployeePage;
 import Pages.LoginPage;
 import org.json.simple.JSONObject;
@@ -97,5 +98,30 @@ public class FullProjectTestRunner extends Setup {
         System.out.println(expectedEmployeeId);
         Assert.assertEquals(actualEmployeeId, expectedEmployeeId);
     }
+
+    @Test(priority = 5)
+    public void doLogout() throws InterruptedException {
+        DashboardPage dashboardPage = new DashboardPage(driver);
+        dashboardPage.btnProfileImage.click();
+        Thread.sleep(2000);
+        dashboardPage.linkLogout.click();
+    }
+
+    @Test(priority = 6)
+    public void doLoginAsEmployee() throws IOException, ParseException {
+        driver.get("https://opensource-demo.orangehrmlive.com");
+        List data = Utils.readJSONArray("./src/test/resources/Users.json");
+        JSONObject userObj = (JSONObject) data.get(data.size() - 1);
+        String username = (String) userObj.get("username");
+        String password = (String) userObj.get("password");
+        System.out.println(username);
+        System.out.println(password);
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.doLogin(username, password);
+        String urlActual = driver.getCurrentUrl();
+        String ursExpected = "dashboard/index";
+        Assert.assertTrue(urlActual.contains(ursExpected));
+    }
+
 
 }
