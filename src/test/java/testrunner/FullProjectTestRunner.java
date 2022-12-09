@@ -36,7 +36,7 @@ public class FullProjectTestRunner extends Setup {
         loginPage.doLogin("Admin", "admin123");
         String urlActual = driver.getCurrentUrl();
         String ursExpected = "dashboard/index";
-        System.out.println(urlActual);
+        //System.out.println(urlActual);
         Assert.assertTrue(urlActual.contains(ursExpected));
         Thread.sleep(3000);
     }
@@ -66,7 +66,7 @@ public class FullProjectTestRunner extends Setup {
             Utils.waitForElement(driver, headerTitle.get(0), 50);
             if (headerTitle.get(0).isDisplayed()) {
                 String actualId = employeePage.txtUserCreds.get(4).getAttribute("value");
-                System.out.println(actualId);
+                //System.out.println(actualId);
                 utils.saveJsonList(userName, password, actualId);
             }
         }
@@ -88,7 +88,7 @@ public class FullProjectTestRunner extends Setup {
     private static void searchAndValidateEmployee(EmployeePage employeePage, JSONObject userObj) throws InterruptedException {
         employeePage.topBarList.get(1).click();
         String actualEmployeeId = (String) userObj.get("Employee Id");
-        System.out.println(actualEmployeeId);
+        //System.out.println(actualEmployeeId);
         List<WebElement> element = employeePage.txtUserCreds;
         Thread.sleep(2000);
         employeePage.txtUserCreds.get(1).click();
@@ -99,7 +99,7 @@ public class FullProjectTestRunner extends Setup {
         Thread.sleep(2000);
         String expectedEmployeeId = employeePage.tableCellList.get(1).getText();
         Utils.scrollDown(driver);
-        System.out.println(expectedEmployeeId);
+        //System.out.println(expectedEmployeeId);
         Assert.assertEquals(actualEmployeeId, expectedEmployeeId);
         Thread.sleep(2000);
     }
@@ -119,8 +119,7 @@ public class FullProjectTestRunner extends Setup {
         JSONObject userObj = (JSONObject) data.get(data.size() - 1);
         String username = (String) userObj.get("username");
         String password = (String) userObj.get("password");
-        System.out.println(username);
-        System.out.println(password);
+        Utils.scrollDown(driver);
         LoginPage loginPage = new LoginPage(driver);
         loginPage.doLogin(username, password);
         String urlActual = driver.getCurrentUrl();
@@ -128,7 +127,7 @@ public class FullProjectTestRunner extends Setup {
         Assert.assertTrue(urlActual.contains(ursExpected));
     }
 
-    @Test (priority = 7)
+    @Test(priority = 7)
     public void updateEmployeeInfo() throws InterruptedException {
         List<WebElement> menuItems = driver.findElements(By.className("oxd-main-menu-item"));
         menuItems.get(2).click();
@@ -166,6 +165,19 @@ public class FullProjectTestRunner extends Setup {
 //            String expBloodGroup = "A+";
 //            Assert.assertTrue(actBloodGroup.equals(expBloodGroup));
         }
+    }
+
+    @Test(priority = 8)
+    public void verifyEditedInfo() throws InterruptedException {
+        EmployeePage employeePage = new EmployeePage(driver);
+        Thread.sleep(2000);
+        employeePage.sideBar.get(2).click();
+        String urlActual = driver.getCurrentUrl();
+        System.out.println(urlActual);
+        String actNationality = employeePage.drpdnNltyBldGrp.get(0).getText();
+        System.out.println(actNationality);
+        String expNationality = "Dominican";
+        Assert.assertTrue(actNationality.equals(expNationality));
     }
 
 }

@@ -91,7 +91,7 @@ public class Utils {
         file.write(jsonArray.toJSONString());
         file.flush();
         file.close();
-        System.out.println("Saved data");
+        //System.out.println("Saved data");
     }
 
     public static List readJSONArray(String filename) throws IOException, ParseException {

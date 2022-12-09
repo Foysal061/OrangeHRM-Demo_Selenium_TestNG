@@ -30,6 +30,9 @@ public class EmployeePage {
     @FindBy(className = "data")
     public List<WebElement> dataClass;
 
+    @FindBy(className = "oxd-text")
+    public List<WebElement> sideBar;
+
     @FindBy(className = "oxd-topbar-body-nav-tab-item")
     public List<WebElement> topBarList;
 
