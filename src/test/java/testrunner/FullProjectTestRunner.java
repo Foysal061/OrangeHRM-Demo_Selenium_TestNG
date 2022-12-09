@@ -123,5 +123,44 @@ public class FullProjectTestRunner extends Setup {
         Assert.assertTrue(urlActual.contains(ursExpected));
     }
 
+    @Test (priority = 7)
+    public void updateEmployeeInfo() throws InterruptedException {
+        List<WebElement> menuItems = driver.findElements(By.className("oxd-main-menu-item"));
+        menuItems.get(2).click();
+        List<WebElement> headerTitle = driver.findElements(By.className("orangehrm-main-title"));
+        Utils.waitForElement(driver, headerTitle.get(0), 50);
+        if (headerTitle.get(0).isDisplayed()) {
+            List<WebElement> buttons = driver.findElements(By.cssSelector("[type=submit]"));
+            EmployeePage employeePage = new EmployeePage(driver);
+//            employeePage.txtUserCreds.get(3).click();
+//            Thread.sleep(1000);
+//            employeePage.txtUserCreds.get(3).clear();
+//            Thread.sleep(1000);
+//            employeePage.txtUserCreds.get(3).sendKeys("abc");
+//            Thread.sleep(2000);
+
+            employeePage.drpdnNltyBldGrp.get(0).click();
+            employeePage.drpdnNltyBldGrp.get(0).sendKeys("d");
+            employeePage.drpdnNltyBldGrp.get(0).sendKeys(Keys.ARROW_DOWN);
+            employeePage.drpdnNltyBldGrp.get(0).sendKeys(Keys.ARROW_DOWN);
+            employeePage.drpdnNltyBldGrp.get(0).sendKeys(Keys.ENTER);
+            buttons.get(0).click();
+
+//            String actNationality = employeePage.drpdnNltyBldGrp.get(0).getText();
+//            String expNationality = "Dominican";
+//            Assert.assertTrue(actNationality.equals(expNationality));
+//            Utils.scrollDown(driver);
+//            employeePage.drpdnNltyBldGrp.get(2).click();
+//            Utils.scrollDown(driver);
+//            employeePage.drpdnNltyBldGrp.get(2).sendKeys("a");
+//            employeePage.drpdnNltyBldGrp.get(2).sendKeys(Keys.ENTER);
+//            Thread.sleep(3000);
+//            WebElement button = driver.findElement(By.xpath("//*[@class='orangehrm-custom-fields']//*[@type='submit']"));
+//            button.click();
+//            String actBloodGroup = employeePage.drpdnNltyBldGrp.get(2).getText();
+//            String expBloodGroup = "A+";
+//            Assert.assertTrue(actBloodGroup.equals(expBloodGroup));
+        }
+    }
 
 }
