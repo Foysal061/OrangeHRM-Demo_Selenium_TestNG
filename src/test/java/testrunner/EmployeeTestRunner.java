@@ -30,7 +30,7 @@ public class EmployeeTestRunner extends Setup {
     }
 
     @Test
-    public void createEmployee() throws IOException, ParseException {
+    public void createEmployee() throws IOException, ParseException, InterruptedException {
         driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/pim/viewEmployeeList");
         EmployeePage employeePage = new EmployeePage(driver);
         Utils utils = new Utils();

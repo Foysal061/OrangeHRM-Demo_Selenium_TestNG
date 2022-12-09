@@ -31,7 +31,9 @@ public class Utils {
 
     private String firstname;
     private String lastname;
-
+//    private String id;
+//    public String getId(){ return id;}
+//    public void setId(String id){ this.id = id;}
     public String getFirstname() {
         return firstname;
     }
@@ -71,6 +73,27 @@ public class Utils {
         file.close();
         System.out.println("Saved data");
     }
+
+    public void saveJsonList(String username, String password, String id) throws IOException, ParseException {
+        String fileName = "./src/test/resources/Users.json";
+        JSONParser parser = new JSONParser();
+        Object obj = parser.parse(new FileReader(fileName));
+        JSONArray jsonArray = (JSONArray) obj;
+
+        JSONObject userObject = new JSONObject();
+        userObject.put("username", username);
+        userObject.put("password",password);
+        userObject.put("Employee Id",id);
+
+        jsonArray.add(userObject);
+
+        FileWriter file = new FileWriter(fileName);
+        file.write(jsonArray.toJSONString());
+        file.flush();
+        file.close();
+        System.out.println("Saved data");
+    }
+
     public static List readJSONArray(String filename) throws IOException, ParseException {
         JSONParser parser = new JSONParser();
         Object object= parser.parse(new FileReader(filename));
