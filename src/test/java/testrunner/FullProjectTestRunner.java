@@ -28,6 +28,17 @@ public class FullProjectTestRunner extends Setup {
         Thread.sleep(3000);
     }
 
+    @Test(priority = 2)
+    public void doLogin() throws InterruptedException {
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.doLogin("Admin", "admin123");
+        String urlActual = driver.getCurrentUrl();
+        String ursExpected = "dashboard/index";
+        System.out.println(urlActual);
+        Assert.assertTrue(urlActual.contains(ursExpected));
+        Thread.sleep(3000);
+    }
 
+    
 
 }
