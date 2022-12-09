@@ -9,7 +9,7 @@ import org.testng.annotations.BeforeTest;
 import java.time.Duration;
 
 public class Setup {
-    public WebDriver driver;
+    public static WebDriver driver;
 
     @BeforeTest
     public void setup() {

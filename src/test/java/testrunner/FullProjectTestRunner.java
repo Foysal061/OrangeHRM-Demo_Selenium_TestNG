@@ -7,6 +7,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -89,14 +90,18 @@ public class FullProjectTestRunner extends Setup {
         String actualEmployeeId = (String) userObj.get("Employee Id");
         System.out.println(actualEmployeeId);
         List<WebElement> element = employeePage.txtUserCreds;
+        Thread.sleep(2000);
         employeePage.txtUserCreds.get(1).click();
+        Thread.sleep(2000);
         employeePage.txtUserCreds.get(1).sendKeys(actualEmployeeId);
-        Thread.sleep(5000);
+        Thread.sleep(2000);
         employeePage.oxdbutton.get(1).click();
-        Thread.sleep(5000);
+        Thread.sleep(2000);
         String expectedEmployeeId = employeePage.tableCellList.get(1).getText();
+        Utils.scrollDown(driver);
         System.out.println(expectedEmployeeId);
         Assert.assertEquals(actualEmployeeId, expectedEmployeeId);
+        Thread.sleep(2000);
     }
 
     @Test(priority = 5)
