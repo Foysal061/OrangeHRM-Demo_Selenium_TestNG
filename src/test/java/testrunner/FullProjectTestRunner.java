@@ -39,6 +39,38 @@ public class FullProjectTestRunner extends Setup {
         Thread.sleep(3000);
     }
 
-    
+    @Test(priority = 3)
+    public void createEmployee() throws IOException, ParseException, InterruptedException {
+        EmployeePage employeePage = new EmployeePage(driver);
+        for (int i = 0; i < 2; i++) {
+            driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/pim/viewEmployeeList");
+            Utils utils = new Utils();
+            utils.generateRandomdata();
+            String firstName = utils.getFirstname();
+            String lastName = utils.getLastname();
+            int randomId = generateRandomNumber(1000, 9999);
+            String userName = firstName + randomId;
+            String password = "P@ssword123";
+            String confirmPassword = password;
+            employeePage.createEmployee(firstName, lastName, userName, password, confirmPassword);
+            List<WebElement> headerTitle = driver.findElements(By.className("orangehrm-main-title"));
+
+            Utils.waitForElement(driver, headerTitle.get(0), 50);
+            Assert.assertTrue(headerTitle.get(0).isDisplayed());
+
+            Utils.waitForElement(driver, employeePage.topBarList.get(1), 50);
+            Assert.assertEquals(employeePage.topBarList.get(1).getText(), "Employee List");
+
+            Utils.waitForElement(driver, headerTitle.get(0), 50);
+            if (headerTitle.get(0).isDisplayed()) {
+                String actualId = employeePage.txtUserCreds.get(4).getAttribute("value");
+                System.out.println(actualId);
+                utils.saveJsonList(userName, password, actualId);
+            }
+        }
+        Thread.sleep(3000);
+    }
+
+
 
 }
