@@ -71,6 +71,31 @@ public class FullProjectTestRunner extends Setup {
         Thread.sleep(3000);
     }
 
+    @Test(priority = 4)
+    public void searchAndValidateEmployees() throws IOException, ParseException, InterruptedException {
+        EmployeePage employeePage = new EmployeePage(driver);
+        driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/pim/viewEmployeeList");
+        List data = Utils.readJSONArray("./src/test/resources/Users.json");
+        JSONObject userObj = (JSONObject) data.get(data.size() - 1);
+        searchAndValidateEmployee(employeePage, userObj);
+        userObj = (JSONObject) data.get(data.size() - 2);
+        searchAndValidateEmployee(employeePage, userObj);
 
+    }
+
+    private static void searchAndValidateEmployee(EmployeePage employeePage, JSONObject userObj) throws InterruptedException {
+        employeePage.topBarList.get(1).click();
+        String actualEmployeeId = (String) userObj.get("Employee Id");
+        System.out.println(actualEmployeeId);
+        List<WebElement> element = employeePage.txtUserCreds;
+        employeePage.txtUserCreds.get(1).click();
+        employeePage.txtUserCreds.get(1).sendKeys(actualEmployeeId);
+        Thread.sleep(5000);
+        employeePage.oxdbutton.get(1).click();
+        Thread.sleep(5000);
+        String expectedEmployeeId = employeePage.tableCellList.get(1).getText();
+        System.out.println(expectedEmployeeId);
+        Assert.assertEquals(actualEmployeeId, expectedEmployeeId);
+    }
 
 }
