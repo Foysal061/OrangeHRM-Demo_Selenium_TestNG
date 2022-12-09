@@ -105,7 +105,7 @@ public class FullProjectTestRunner extends Setup {
     }
 
     @Test(priority = 5)
-    public void doLogout() throws InterruptedException {
+    public void logoutFromAdmin() throws InterruptedException {
         DashboardPage dashboardPage = new DashboardPage(driver);
         dashboardPage.btnProfileImage.click();
         Thread.sleep(2000);
@@ -173,11 +173,19 @@ public class FullProjectTestRunner extends Setup {
         Thread.sleep(2000);
         employeePage.sideBar.get(2).click();
         String urlActual = driver.getCurrentUrl();
-        System.out.println(urlActual);
+        Utils.waitForElement(driver, employeePage.drpdnNltyBldGrp.get(0), 50);
         String actNationality = employeePage.drpdnNltyBldGrp.get(0).getText();
         System.out.println(actNationality);
         String expNationality = "Dominican";
         Assert.assertTrue(actNationality.equals(expNationality));
+    }
+
+    @Test(priority = 9)
+    public void logoutFromEmployee() throws InterruptedException {
+        DashboardPage dashboardPage = new DashboardPage(driver);
+        dashboardPage.btnProfileImage.click();
+        Thread.sleep(2000);
+        dashboardPage.linkLogout.click();
     }
 
 }
